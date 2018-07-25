@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_21_032241) do
+ActiveRecord::Schema.define(version: 2018_07_25_151204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "email", null: false
-    t.string "password", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2018_07_21_032241) do
     t.boolean "share_mode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "accounts_id"
+    t.index ["accounts_id"], name: "index_albums_on_accounts_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -38,6 +40,8 @@ ActiveRecord::Schema.define(version: 2018_07_21_032241) do
     t.boolean "share_mode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "accounts_id"
+    t.index ["accounts_id"], name: "index_photos_on_accounts_id"
   end
 
 end
