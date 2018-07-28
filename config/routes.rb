@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   resources :accounts do
   	resources :photos, :albums
   end
+  
+  resources :photos
 
+  resources :albums do
+  	resources :photos
+  end
 
 end
