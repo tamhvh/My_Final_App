@@ -1,4 +1,3 @@
 class Photo < ApplicationRecord
-	belongs_to :account
-	belongs_to :albums, optional: true
+	belongs_to :photoable, polymorphic: true
 end

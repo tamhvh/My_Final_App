@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'users#show'
 
-  resources :accounts do
-  	resources :photos, :albums
-  end
-  
+  devise_for :user
+
+  resource :user
+
+  resources :users
+
+=begin
   resources :photos
 
-  resources :albums do
-  	resources :photos
-  end
+  resources :albums
 
+  resources :user , shallow: true do
+  	resources :photos, :albums
+  end
+=end
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
