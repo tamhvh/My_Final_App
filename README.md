@@ -21,8 +21,3 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
-<<<<<<< HEAD
-=======
-Final App
->>>>>>> 1c96b807115365beb95ef6d2c9efc73d21a38a24
