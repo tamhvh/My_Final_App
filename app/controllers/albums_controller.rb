@@ -1,4 +1,6 @@
 class AlbumsController < ApplicationController
+	before_action :authenticate_user!, :only => [:create, :update, :destroy]
+	
 	def index
 		@albums = Album.all
 	end
@@ -8,11 +10,11 @@ class AlbumsController < ApplicationController
 	end
 	
 	def new
-		@album = Album.new
+		@album = current_user.albums.new
 	end
 	
 	def create
-		@album = Album.new(phot_params)
+		@album = current_user.albums.new(phot_params)
 		
 		if @album.save
 			redirect_to albums_path
@@ -22,13 +24,13 @@ class AlbumsController < ApplicationController
 	end
 	
 	def edit
-		@album = Album.find(params[:id])
+		@album = current_user.albums.find(params[:id])
 	end
 	
 	def update
-		@album = Album.find(params[:id])
+		@album = current_user.albums.find(params[:id])
 
-		if @Album.update(photo_params)
+		if @album.update(photo_params)
 			redirect_to albums_path
 		else
 			render 'edit'
@@ -36,14 +38,15 @@ class AlbumsController < ApplicationController
 	end
 	
 	def destroy
-		@photo = Album.find(params[:id])
-		@photo.destroy
+		@album = current_user.albums.find(params[:id])
+		@album.destroy
 
 		redirect_to albums_path
 	end
 
 	private
 		def photo_params
-			params.require(:album).permit(:title, :description)
+			params.require(:album).permit(:title, :description, :share_mode, :image)
 		end
+		
 end

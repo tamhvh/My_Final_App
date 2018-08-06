@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+	before_action :authenticate_user!, :only => [:create, :update, :destroy]
+	
 	def index
 		@photos = Photo.all
 	end
@@ -8,11 +10,11 @@ class PhotosController < ApplicationController
 	end
 	
 	def new
-		@photo = Photo.new
+		@photo = current_user.photos.new
 	end
 	
 	def create
-		@photo = Photo.new(phot_params)
+		@photo = current_user.photos.new(photo_params)
 		
 		if @photo.save
 			redirect_to photos_path
@@ -22,11 +24,11 @@ class PhotosController < ApplicationController
 	end
 	
 	def edit
-		@photo = Photo.find(params[:id])
+		@photo = current_user.photos.find(params[:id])
 	end
 	
 	def update
-		@photo = Photo.find(params[:id])
+		@photo = current_user.photos.find(params[:id])
 
 		if @photo.update(photo_params)
 			redirect_to photos_path
@@ -36,7 +38,7 @@ class PhotosController < ApplicationController
 	end
 	
 	def destroy
-		@photo = Photo.find(params[:id])
+		@photo = current_user.photos.find(params[:id])
 		@photo.destroy
 
 		redirect_to photos_path
@@ -44,6 +46,6 @@ class PhotosController < ApplicationController
 
 	private
 		def photo_params
-			params.require(:photo).permit(:title, :description)
+			params.require(:photo).permit(:title, :description, :share_mode, :image)
 		end
 end
