@@ -6,4 +6,25 @@
         - @album.errors.full_messages.each do |message|
           li = message
 
+  p
+	= f.label :title
+	br
+	= f.text_field :title, placeholder: "Album Title"
+	br
+
+  p
+  	= f.label :description
+	br
+	= f.text_area :description, placeholder: "Album Description"
+	br
+
+  p
+	= f.label :share_mode
+	br
+	= f.select :share_mode, [['Public', true], ['Private', false]]
+	br
+
+  p
+    = f.file_field :image, :multiple => true
+
   .actions = f.submit
