@@ -10,5 +10,55 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *
  */
- @import 'bootstrap';
+@import 'bootstrap';
+
+.navbar-brand a {
+	color: white;
+	text-decoration: none;
+}
+
+.btn a {
+	color: white;
+	text-decoration: none;
+}
+
+.form-box {
+	max-width: 350px;
+	height: auto;
+	padding: 15px;
+	margin: auto;
+	text-align: left;
+}
+
+.field {
+	margin-left: 50px;
+}
+
+.actions {
+	text-align: center;
+}
+
+.actions input{
+	background-color: blue;
+	color: white;
+	font-weight: bold;
+}
+
+.form-box input {
+	border-radius: 5px;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+
+.box-model{
+	background-color: #F0EFEF;
+	width: 310px;
+    border: 1px solid #F0EFEF;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+

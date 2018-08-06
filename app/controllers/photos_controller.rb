@@ -6,11 +6,19 @@ class PhotosController < ApplicationController
 	end
 
 	def show
-		@photo = current_user.photos.find(params[:id])
+		if user_signed_in?
+			@photo = current_user.photos.find(params[:id])
+		else
+			@photo = Photo.find(params[:id])
+		end
 	end
 	
 	def new
-		@photo = current_user.photos.new
+		if user_signed_in?
+			@photo = current_user.photos.new
+		else
+			@photo = Photo.new
+		end
 	end
 	
 	def create
@@ -24,7 +32,11 @@ class PhotosController < ApplicationController
 	end
 	
 	def edit
-		@photo = current_user.photos.find(params[:id])
+		if user_signed_in?
+			@photo = current_user.photos.find(params[:id])
+		else
+			@photo = Photo.find(params[:id])
+		end
 	end
 	
 	def update
