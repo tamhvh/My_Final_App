@@ -10,6 +10,9 @@ table
   tbody
     - @albums.each do |album|
       tr
+        td = album.title
+        td = photo.description
+        td = image_tag photo.image.url
         td = link_to 'Show', album
         td = link_to 'Edit', edit_album_path(album)
         td = link_to 'Destroy', album, data: { confirm: 'Are you sure?' }, method: :delete

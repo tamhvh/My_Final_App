@@ -14,7 +14,7 @@ class AlbumsController < ApplicationController
 	end
 	
 	def create
-		@album = current_user.albums.new(phot_params)
+		@album = current_user.albums.new(album_params)
 		
 		if @album.save
 			redirect_to albums_path
@@ -30,7 +30,7 @@ class AlbumsController < ApplicationController
 	def update
 		@album = current_user.albums.find(params[:id])
 
-		if @album.update(photo_params)
+		if @album.update(album_params)
 			redirect_to albums_path
 		else
 			render 'edit'
@@ -45,7 +45,7 @@ class AlbumsController < ApplicationController
 	end
 
 	private
-		def photo_params
+		def album_params
 			params.require(:album).permit(:title, :description, :share_mode, :image)
 		end
 		
