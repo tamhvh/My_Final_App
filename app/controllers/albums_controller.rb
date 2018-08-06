@@ -6,7 +6,11 @@ class AlbumsController < ApplicationController
 	end
 
 	def show
-		@album = Album.find(params[:id])
+		if user_signed_in?
+			@album = current_user.albums.find(params[:id])
+		else
+			@album = Photo.find(params[:id])
+		end
 	end
 	
 	def new
@@ -24,7 +28,11 @@ class AlbumsController < ApplicationController
 	end
 	
 	def edit
-		@album = current_user.albums.find(params[:id])
+		if user_signed_in?
+			@album = current_user.albums.find(params[:id])
+		else
+			@album = Photo.find(params[:id])
+		end
 	end
 	
 	def update

@@ -1,41 +1,35 @@
 == render 'layouts/headbar'
-div class="d-flex justify-content-center flex-column"
-  h2 class="p-2"
-    | Sign up
-  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    = devise_error_messages!
+div class="form-group"
+  div class="form-box"
+    h2 class="text-center text-primary"
+      | Fotobook Signup
+    div class= "box-model text-left font-weight-bold"
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        .field
+          = f.label :firstname
+          br
+          = f.text_field :firstname, autofocus: true, placeholder: "First Name"
 
-    .field
-      = f.label :firstname
-      br
-      = f.text_field :firstname, autofocus: true
+        .field
+          = f.label :lastname
+          br
+          = f.text_field :lastname, placeholder: "Last Name"
 
-    .field
-      = f.label :lastname
-      br
-      = f.text_field :lastname
+        .field
+          = f.label :email
+          br
+          = f.email_field :email, autocomplete: "email", placeholder: "email@example.com"
 
-    .field
-      = f.label :email
-      br
-      = f.email_field :email, autocomplete: "email"
+        .field
+          = f.label :password
+          br
+          = f.password_field :password, autocomplete: "off", placeholder: "Password"
 
-    .field
-      = f.label :password
-      - if @minimum_password_length
-        em
-          | (
-          = @minimum_password_length
-          |  characters minimum)
-      br
-      = f.password_field :password, autocomplete: "off"
+        .field
+          = f.label :password_confirmation
+          br
+          = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password"
 
-    .field
-      = f.label :password_confirmation
-      br
-      = f.password_field :password_confirmation, autocomplete: "off"
-
-    .actions
-      = f.submit "Sign up"
-
-  = render "devise/shared/links"
+        .actions
+          = f.submit "Signup"
+  javascript: $("#new_user").validate()
