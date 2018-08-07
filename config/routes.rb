@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root 'users#show'
+  root 'feeds#index'
+
+  get '/feeds', to: "feeds#index"
 
   devise_for :user
 

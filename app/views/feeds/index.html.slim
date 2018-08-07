@@ -1,0 +1,26 @@
+== render "layouts/headbar"
+div class="row mt-1"
+	div class="col-sm-2"
+		= link_to "Feeds", feeds_path
+	div class="col-sm-8"
+		div class="form-group"
+		
+ 		div class="row ml-1"
+ 			- @photos.each do |photo|			 
+						div class="card border-dark ml-1 mt-1"			
+			 				div class="col-xs-2"
+				 				div class="card border"
+				 					img class="card-img img-fluid"
+				 						= image_tag photo.image.url(:medium)
+				 			div class="col-xs-2"
+				 				div class="card"
+				 					div class="card-body"
+					 					p class="card-text" 
+
+					 					h5 class="card-title text-weight-bold" 
+					 						= photo.title
+					 					p class="card-text" 
+					 						= photo.description
+					 					p class="card-text"
+					 						= photo.created_at
+	div class="col-sm-2"
