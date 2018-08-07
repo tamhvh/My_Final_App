@@ -2,9 +2,13 @@
 div class="row mt-1"
 	div class="col-sm-2"
 		= link_to "Feeds", feeds_path
+		br
+		= link_to "My Albums", albums_path
+		br
+		= link_to "My Photos", photos_path
 	div class="col-sm-8"
 		div class="form-group"
-		
+
  		div class="row ml-1"
  			- @photos.each do |photo|			 
 						div class="card border-dark ml-1 mt-1"			

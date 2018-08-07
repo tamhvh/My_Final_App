@@ -2,7 +2,7 @@ class AlbumsController < ApplicationController
 	before_action :authenticate_user!, :only => [:create, :update, :destroy]
 	
 	def index
-		@albums = Album.all
+		@albums = Album.all.order("created_at desc")
 	end
 
 	def show
@@ -19,7 +19,7 @@ class AlbumsController < ApplicationController
 	
 	def create
 		@album = current_user.albums.new(album_params)
-
+		params.permit(:image)
 		if @album.save
 			@photo = @album.photos.create(params[:image])
 			redirect_to albums_path
