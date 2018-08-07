@@ -1,9 +1,16 @@
 == render 'layouts/headbar'
+div class="container"
+	div class="row"
+		div class="col-sx-4"
+			=> link_to 'My Albums', albums_path
+			br
+			=> link_to 'My Photos', photos_path
+		div class="col-sx-8"
 
-h3 User
-p 
-| Name: #{@user.firstname if @user.firstname}
-p 
-| Email: #{@user.email if @user.email}
-p
-=> link_to 'Sign Out', destroy_user_session_path, :method => 'delete'
+			h3 User
+			p 
+			| Name: #{@user.firstname if @user.firstname}
+			p 
+			| Email: #{@user.email if @user.email}
+			p
+			=> link_to 'Sign Out', destroy_user_session_path, :method => 'delete'

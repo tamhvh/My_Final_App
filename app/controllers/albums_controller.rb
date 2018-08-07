@@ -6,21 +6,22 @@ class AlbumsController < ApplicationController
 	end
 
 	def show
-		if user_signed_in?
-			@album = current_user.albums.find(params[:id])
-		else
-			@album = Photo.find(params[:id])
-		end
+		@album = Album.find(params[:id])
 	end
 	
 	def new
-		@album = current_user.albums.new
+		if user_signed_in?
+			@album = current_user.albums.new
+		else
+			@album = Album.new
+		end
 	end
 	
 	def create
 		@album = current_user.albums.new(album_params)
-		
+
 		if @album.save
+			@photo = @album.photos.create(params[:image])
 			redirect_to albums_path
 		else
 			render 'new'
@@ -54,7 +55,7 @@ class AlbumsController < ApplicationController
 
 	private
 		def album_params
-			params.require(:album).permit(:title, :description, :share_mode, :image)
+			params.require(:album).permit(:title, :description, :share_mode)
 		end
 		
 end
