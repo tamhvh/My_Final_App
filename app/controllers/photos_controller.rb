@@ -6,11 +6,7 @@ class PhotosController < ApplicationController
 	end
 
 	def show
-		if user_signed_in?
-			@photo = current_user.photos.find(params[:id])
-		else
-			@photo = Photo.find(params[:id])
-		end
+		@photo = Photo.find(params[:id])
 	end
 	
 	def new
@@ -50,7 +46,12 @@ class PhotosController < ApplicationController
 	end
 	
 	def destroy
-		@photo = current_user.photos.find(params[:id])
+		@album = Album.find_by_user_id current_user.id
+		if @album.nil?
+			@photo = current_user.photos.find(params[:id])
+		else
+			@photo = @album.photos.find(params[:id])
+		end
 		@photo.destroy
 
 		redirect_to photos_path
