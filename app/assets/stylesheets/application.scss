@@ -12,7 +12,8 @@
  *
  *
  */
-@import 'bootstrap';
+@import "bootstrap";
+@import "font-awesome.css";
 
 .navbar-brand a {
 	color: white;
@@ -63,5 +64,9 @@
 
 .photo-box{
 	max-width: 300px
+}
+
+.feed-box{
+	border: 1px solid #F0EFEF;
 }
 
