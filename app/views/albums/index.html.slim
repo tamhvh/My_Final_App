@@ -7,20 +7,39 @@ div class="row mt-1"
   div class="col-sm-8"
     div class="row" 
       - @albums.each do |album|
-        div class="col-sx-2"
-          div class="card border-dark ml-1 mt-1"
-            img class="card-img img-fluid"
-              = image_tag album.photos.first.image.url(:medium)
-            div class="card-body"
-              p class="card-text"
-                = album.user.firstname
-              p class="card-title" 
-                = album.title
-              p class="card-text"
-                = album.description
-              = link_to 'Show', album
-              = link_to 'Edit', edit_album_path(album)
-              = link_to 'Destroy', album, data: { confirm: 'Are you sure?' }, method: :delete
+        div class="openAlbumModal card border-dark ml-1 mt-1" data-toggle="modal" 
+          div class="col-xs-2"
+            div class="card border"
+              img class="card-img img-fluid" 
+                = image_tag album.photos.first.image.url(:medium)
+          div class="col-xs-2"
+            div class="card"
+              div class="card-body"
+                p class="card-text" 
+                  = album.user.firstname
+                h5 class="card-title text-weight-bold album-title" data="#{album.title}"
+                  = album.title
+                p class="card-text album-description" data="#{album.description}"
+                  = album.description
+                p class="card-text"
+                  = album.created_at
+                = link_to 'Show', album
+                = link_to 'Edit', edit_album_path(album)
+                = link_to 'Destroy', album, data: { confirm: 'Are you sure?' }, method: :delete
+
+        div class="modal" id="albumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+          div class="modal-dialog modal-dialog-centered modal-sm" role="document"
+            div class="modal-content"
+              div class="modal-header"
+                h5 class="modal-title" id="exampleModalLabel"
+  
+                button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                  span aria-hidden="true" &times
+                
+              div class="modal-body center"
+                img class="img-fluid img-responsive"
+
+              div class="modal-footer text-align-center mr-auto"      
     div
       = paginate @albums  
   div class="col-sm-2"

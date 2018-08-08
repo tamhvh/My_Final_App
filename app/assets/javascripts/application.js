@@ -19,15 +19,17 @@
 //= require jquery.validate
 //= require_tree .
 
-$(".box-model").validate();
+
 
 $(document).ready(function(){
+
+	$("a").click(function() {
+	    location.reload(true);
+	});
 
 	$(".openPhotoModal").on('click', function(event){
 
 		$('#photoModal').modal('show');
-
-		//var photoId = $(this).attr("data-id");
 		var photoTitle = $(this).find(".photo-title").text();
 		var photoDescription = $(this).find(".photo-description").text();
 		var photoImage = $(this).find(".card-img").next().attr('src');
@@ -36,21 +38,40 @@ $(document).ready(function(){
 		$('.modal-body img').attr("src", photoImage);
 		$('.modal-footer').text(photoDescription);
 
+	});
+
+	$(".openAlbumModal").on('click', function(event){
+
+		$('#albumModal').modal('show');
+		var albumTitle = $(this).find(".album-title").text();
+		var albumDescription = $(this).find(".album-description").text();
+		var albumImage = $(this).find(".card-img").next().attr('src');
+
+		$('.modal-title').text(albumTitle);
+		$('.modal-body img').attr("src", albumImage);
+		$('.modal-footer').text(albumDescription);
 
 	});
 
-})
+	$('#albumOption, #photoOption').on('click', function(event){
+	   if (this.id == 'albumOption') {
+	   		$('#photosView').attr("hidden", true);
+	   		$('#albumsView').attr("hidden", false);
+	 	}
+	   else if (this.id == 'photoOption') {
+	   		$('#photosView').attr("hidden", false);
+	   		$('#albumsView').attr("hidden", true);
+	   }
+	});
 
-$(document).ready(function(){
-	$(".onChangeToAlbums").on('click', function(event){
-		var object = $(this).attr('value');
-		$.ajax({
-			url: "/feeds",
-			type: "GET",
-			data: { data: {model: object}},
-			success: function(data){
-				console.log("success");
-		    }
-		});
+	$("#new_photo").validate({
+		rules:{
+			title: {
+				require: true
+			}
+		},
+		message: {
+			title: "Require Field"
+		} 
 	});
 })
