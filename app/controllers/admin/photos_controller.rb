@@ -1,19 +1,8 @@
 class Admin::PhotosController < ApplicationController
-	before_filter :get_photo, only: [:show, :edit, :update, :destroy]
+	before_action :get_photo, only: [:edit, :update, :destroy]
 
 	def index
 		@photos = Photo.all
-	end
-
-	def show
-	end
-	
-	def new
-		@photo = Photo.new
-	end
-
-	def create
-		@photo = Photo.new(photo_params)
 	end
 
 	def edit
