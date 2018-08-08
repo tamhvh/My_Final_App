@@ -19,6 +19,7 @@
 //= require jquery.validate
 //= require_tree .
 
+$(".box-model").validate();
 
 $(document).ready(function(){
 
@@ -40,6 +41,16 @@ $(document).ready(function(){
 
 })
 
-$.ajax({
-	
-});
+$(document).ready(function(){
+	$(".onChangeToAlbums").on('click', function(event){
+		var object = $(this).attr('value');
+		$.ajax({
+			url: "/feeds",
+			type: "GET",
+			data: { data: {model: object}},
+			success: function(data){
+				console.log("success");
+		    }
+		});
+	});
+})
