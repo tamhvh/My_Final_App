@@ -2,7 +2,7 @@ class AlbumsController < ApplicationController
 	before_action :authenticate_user!, :only => [:create, :update, :destroy]
 	
 	def index
-		@albums = Album.all
+		@albums = Album.all.order("created_at desc").page params[:page]
 	end
 
 	def show
@@ -20,14 +20,18 @@ class AlbumsController < ApplicationController
 	def create
 		@album = current_user.albums.new(album_params)
 		photo_array_params = params.require(:album).permit(image: [])
-		puts photo_array_params[:image][0].original_filename
+		photo_array = photo_array_params[:image]
+		param_hash = Hash.new
 		if @album.save
-			@photo = @album.photos.new(photo_params[:image])
-			@photo.title = photo_params[:image][0].original_filename
-			@photo.description = album_params[:description]
-			@photo.share_mode = true
-			@photo.save
-			redirect_to albums_path
+			photo_array.each do |arr|
+				param_hash[:image] = arr
+				@photo = @album.photos.new(param_hash)
+				@photo.title = arr.original_filename
+				@photo.description = album_params[:description]
+				@photo.share_mode = album_params[:share_mode]
+				@photo.save
+			end
+			redirect_to albums_path, notice: "Create Album Success!"
 		else
 			render 'new'
 		end

@@ -2,7 +2,7 @@ class PhotosController < ApplicationController
 	before_action :authenticate_user!, :only => [:create, :update, :destroy]
 	
 	def index
-		@photos = Photo.all.order("created_at desc")
+		@photos = Photo.all.order("created_at desc").page params[:page]
 	end
 
 	def show

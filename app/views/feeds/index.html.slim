@@ -1,5 +1,5 @@
 == render "layouts/headbar"
-div class="row mt-1"
+div class="row mt-2"
 	div class="col-sm-2"
 		= link_to "Feeds", feeds_path
 		br
@@ -7,24 +7,41 @@ div class="row mt-1"
 		br
 		= link_to "My Photos", photos_path
 	div class="col-sm-8"
-		div class="form-group"
-		
  		div class="row ml-1"
- 			- @photos.each do |photo|			 
-						div class="card border-dark ml-1 mt-1"			
-			 				div class="col-xs-2"
-				 				div class="card border"
-				 					img class="card-img img-fluid"
-				 						= image_tag photo.image.url(:medium)
-				 			div class="col-xs-2"
-				 				div class="card"
-				 					div class="card-body"
-					 					p class="card-text" 
+ 			- @photos.each do |photo|
 
-					 					h5 class="card-title text-weight-bold" 
-					 						= photo.title
-					 					p class="card-text" 
-					 						= photo.description
-					 					p class="card-text"
-					 						= photo.created_at
+				div class="openPhotoModal card border-dark ml-1 mt-1" data-toggle="modal"	
+			 		div class="col-xs-2"
+				 		div class="card border"
+				 			img class="card-img img-fluid" 
+				 				= image_tag photo.image.url(:medium)
+				 	div class="col-xs-2"
+				 		div class="card"
+				 			div class="card-body"
+					 			p class="card-text" 
+
+					 			h5 class="card-title text-weight-bold photo-title" data="#{photo.title}"
+					 				= photo.title
+					 			p class="card-text photo-description" data="#{photo.description}"
+					 				= photo.description
+					 			p class="card-text"
+					 				= photo.created_at
+
+				div class="modal" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+				  div class="modal-dialog modal-dialog-centered" role="document"
+				    div class="modal-content"
+				      div class="modal-header"
+				        h5 class="modal-title" id="exampleModalLabel"
+	
+				        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+				          span aria-hidden="true" &times
+				        
+				      div class="modal-body center"
+				      	img class="img-fluid img-responsive"
+
+				      div class="modal-footer text-align-center mr-auto"
+				      	
 	div class="col-sm-2"
+
+
+ 
