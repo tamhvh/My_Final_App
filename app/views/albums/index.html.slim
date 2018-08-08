@@ -10,15 +10,18 @@ div class="row mt-1"
         div class="col-sx-2"
           div class="card border-dark ml-1 mt-1"
             img class="card-img img-fluid"
-
+              = image_tag album.photos.first.image.url(:medium)
             div class="card-body"
+              p class="card-text"
+                = album.user.firstname
               p class="card-title" 
                 = album.title
               p class="card-text"
                 = album.description
-                = link_to 'Show', album
-                = link_to 'Edit', edit_album_path(album)
-                = link_to 'Destroy', album, data: { confirm: 'Are you sure?' }, method: :delete
-
+              = link_to 'Show', album
+              = link_to 'Edit', edit_album_path(album)
+              = link_to 'Destroy', album, data: { confirm: 'Are you sure?' }, method: :delete
+    div
+      = paginate @albums  
   div class="col-sm-2"
     = link_to 'New Album', new_album_path

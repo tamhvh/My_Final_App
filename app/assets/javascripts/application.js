@@ -18,3 +18,28 @@
 //= require bootstrap
 //= require jquery.validate
 //= require_tree .
+
+
+$(document).ready(function(){
+
+	$(".openPhotoModal").on('click', function(event){
+
+		$('#photoModal').modal('show');
+
+		//var photoId = $(this).attr("data-id");
+		var photoTitle = $(this).find(".photo-title").text();
+		var photoDescription = $(this).find(".photo-description").text();
+		var photoImage = $(this).find(".card-img").next().attr('src');
+
+		$('.modal-title').text(photoTitle);
+		$('.modal-body img').attr("src", photoImage);
+		$('.modal-footer').text(photoDescription);
+
+
+	});
+
+})
+
+$.ajax({
+	
+});

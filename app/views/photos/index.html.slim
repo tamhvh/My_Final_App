@@ -5,7 +5,8 @@ div class="row mt-1"
     br
     = link_to "My Albums", albums_path
   div class="col-sm-8"
-    div class="row"  
+    div class="row"
+
       - @photos.each do |photo|
         div class="col-sx-2"
           div class="card border-dark ml-1 mt-1"
@@ -19,6 +20,7 @@ div class="row mt-1"
               = link_to 'Show', photo
               = link_to 'Edit', edit_photo_path(photo)
               = link_to 'Destroy', photo, data: { confirm: 'Are you sure?' }, method: :delete
-
+    div class="cente-block mt-1"          
+      = paginate @photos
   div class="col-sm-2"          
     = link_to 'New Photo', new_photo_path
