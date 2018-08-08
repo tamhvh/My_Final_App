@@ -7,11 +7,14 @@ Rails.application.routes.draw do
 
   resource :user
 
-  resources :users
-
   resources :photos
 
   resources :albums
+
+  namespace :admin do
+    root 'admin/photos#index'
+    resources :photos, :albums, :users
+  end
 
   scope '/user' do
     resources :photos, :albums

@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, password_length: 6..64
          #:confirmable
 
+  validates :firstname, presence: true, length: {maximum: 25}, allow_blank: false
+  validates :lasttname, presence: true, length: {maximum: 25}, allow_blank: false
+
   has_many :albums
   has_many :photos, as: :photoable
 

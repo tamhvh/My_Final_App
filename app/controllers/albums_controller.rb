@@ -1,6 +1,6 @@
 class AlbumsController < ApplicationController
 	before_action :authenticate_user!, :only => [:create, :update, :destroy]
-	
+
 	def index
 		@albums = Album.all.order("created_at desc").page params[:page]
 	end

@@ -7,44 +7,20 @@ div class="row mt-2"
 		br
 		= link_to "My Photos", photos_path
 	div class="col-sm-8"
+		div class="text-center"
+			div class="btn-group btn-group-toggle text-center" data-toggle="buttons"
+				label class="btn btn-light text-primary" id="albumOption"
+					input type="radio" name="options" autocomplete="off" ALBUM
+				label class="btn btn-light text-primary" id="photoOption" 
+					input type="radio" name="options" autocomplete="off" PHOTO
 
- 		/input class="onChangeToAlbums btn btn-default bg-primary text-white" type="button" value="Albums"
- 		= button_to "Albums", action: "index", controller: "feeds"
- 		div class="row ml-1"
- 			- @photos.each do |photo|
+		div id="photosView" hidden=true
+			== render "layouts/photos"
 
-				div class="openPhotoModal card border-dark ml-1 mt-1" data-toggle="modal"	
-			 		div class="col-xs-2"
-				 		div class="card border"
-				 			img class="card-img img-fluid" 
-				 				= image_tag photo.image.url(:medium)
-				 	div class="col-xs-2"
-				 		div class="card"
-				 			div class="card-body"
-					 			p class="card-text" 
+		div id="albumsView" hidden=false
+			== render "layouts/albums"
 
-					 			h5 class="card-title text-weight-bold photo-title" data="#{photo.title}"
-					 				= photo.title
-					 			p class="card-text photo-description" data="#{photo.description}"
-					 				= photo.description
-					 			p class="card-text"
-					 				= photo.created_at
-
-				div class="modal" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-				  div class="modal-dialog modal-dialog-centered" role="document"
-				    div class="modal-content"
-				      div class="modal-header"
-				        h5 class="modal-title" id="exampleModalLabel"
-	
-				        button type="button" class="close" data-dismiss="modal" aria-label="Close"
-				          span aria-hidden="true" &times
-				        
-				      div class="modal-body center"
-				      	img class="img-fluid img-responsive"
-
-				      div class="modal-footer text-align-center mr-auto"
-				      	
 	div class="col-sm-2"
-
+	
 
  
