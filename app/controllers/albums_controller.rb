@@ -19,9 +19,14 @@ class AlbumsController < ApplicationController
 	
 	def create
 		@album = current_user.albums.new(album_params)
-		params.permit(:image)
+		photo_array_params = params.require(:album).permit(image: [])
+
 		if @album.save
-			@photo = @album.photos.create(params[:image])
+			@photo = @album.photos.new(photo_params[:image])
+			@photo.title = photo_params[:image][0].original_filename
+			@photo.description = album_params[:description]
+			@photo.share_mode = true
+			@photo.save
 			redirect_to albums_path
 		else
 			render 'new'

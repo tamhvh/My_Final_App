@@ -1,25 +1,24 @@
 == render 'layouts/headbar'
 div class="row mt-1"
   div class="col-sm-2"
-      = link_to "Feeds", feeds_path
-      br
-      = link_to "My Photos", photos_path
+    = link_to "Feeds", feeds_path
+    br
+    = link_to "My Photos", photos_path
   div class="col-sm-8"
-    div class="row"
+    div class="row" 
       - @albums.each do |album|
-        div class="card border-dark"
-          div class="card-img"
+        div class="col-sx-2"
+          div class="card border-dark ml-1 mt-1"
+            img class="card-img img-fluid"
 
-          div class="card-body"
-            div class="card-title"  
-              = album.title
-            div class="card-text"
-              = album.description
-            div
-              = link_to 'Show', album
-              = link_to 'Edit', edit_album_path(album)
-              = link_to 'Destroy', album, data: { confirm: 'Are you sure?' }, method: :delete
+            div class="card-body"
+              p class="card-title" 
+                = album.title
+              p class="card-text"
+                = album.description
+                = link_to 'Show', album
+                = link_to 'Edit', edit_album_path(album)
+                = link_to 'Destroy', album, data: { confirm: 'Are you sure?' }, method: :delete
 
-
-  div class="col-sm-2"         
+  div class="col-sm-2"
     = link_to 'New Album', new_album_path
