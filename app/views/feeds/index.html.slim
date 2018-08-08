@@ -7,6 +7,9 @@ div class="row mt-2"
 		br
 		= link_to "My Photos", photos_path
 	div class="col-sm-8"
+
+ 		/input class="onChangeToAlbums btn btn-default bg-primary text-white" type="button" value="Albums"
+ 		= button_to "Albums", action: "index", controller: "feeds"
  		div class="row ml-1"
  			- @photos.each do |photo|
 
